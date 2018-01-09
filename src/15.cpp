@@ -13,7 +13,7 @@ struct ListNode {
 class Solution {
 public:
     ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {
-		if (pListHead == nullptr)
+		if (pListHead == nullptr || k == 0) //k为无符号整形，k为0时，k--为42亿
 		{
 			return nullptr;
 		}
@@ -25,7 +25,7 @@ public:
 			{
 				first = first->next;
 			}
-			else
+			else   //链表长度小于k
 			{
 				return nullptr;
 			}
