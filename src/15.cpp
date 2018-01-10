@@ -5,7 +5,6 @@
 // 2）ppre<-pre  node，与1）步骤类似进行赋值
 // 3）next指向空，node结点此时还未指向pre，需进行赋值后，返回node结点
 
-
 /*
 struct ListNode {
 	int val;
