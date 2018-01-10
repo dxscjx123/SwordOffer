@@ -1,6 +1,10 @@
-//分析：
-//前指针和后指针，前指针先走k-1步，前后指针同时走，当前指针到达链
-//表尾部，后指针指向倒数第k个节点
+// 分析：
+// 定义三个指针，指向前一结点pre，当前节点node，后一结点next。
+// 1 -> 2 -> 3 -> 4
+// 1）pre<-node  next，由于需要断开next，需提前进行保存
+// 2）ppre<-pre  node，与1）步骤类似进行赋值
+// 3）next指向空，node结点此时还未指向pre，需进行赋值后，返回node结点
+
 
 /*
 struct ListNode {
@@ -12,30 +16,21 @@ struct ListNode {
 };*/
 class Solution {
 public:
-    ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {
-		if (pListHead == nullptr || k == 0) //k为无符号整形，k为0时，k--为42亿
+    ListNode* ReverseList(ListNode* pHead) {
+		ListNode *ReverseHead = nullptr;
+		ListNode *pNode = pHead;
+		ListNode *pPre = nullptr;
+		while (pNode != nullptr)
 		{
-			return nullptr;
-		}
-		struct ListNode *first = pListHead;
-		struct ListNode *second = pListHead;
-		while (k != 1)
-		{
-			if (first->next != nullptr)
+			ListNode *pNext = pNode->next;
+			if (pNext == nullptr)
 			{
-				first = first->next;
+				ReverseHead = pNode;
 			}
-			else   //链表长度小于k
-			{
-				return nullptr;
-			}
-			k--;
+			pNode->next = pPre;
+			pPre = pNode;
+			pNode = pNext;
 		}
-		while (first->next != nullptr)
-		{
-			second = second->next;
-			first = first->next;
-		}
-		return second;
+		return ReverseHead;
     }
 };
