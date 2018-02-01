@@ -6,9 +6,11 @@
 // 这里主要在于对INT_MIN的判断，compare函数中直接对string进行比较即可，
 // string对运算符的重载能直接对两个字符串进行比较。
 
+//更新了采用STL自带的sort进行排序的方法。
+
 class Solution {
 public:
-	int compare(int number, int flag)
+	bool compare(int number, int flag)
 	{
 		string s_num = to_string(number);
 		string s_flag = to_string(flag);
@@ -17,10 +19,10 @@ public:
 		string flag_num = s_flag + s_num;
 
         if (num_flag < flag_num)
-			return -1;
+			return true;
 		else if (num_flag > flag_num)
-			return 1;
-		return 0;
+			return false;
+		return true;
 	}
 
 	int Partition(vector<int> &numbers, int start, int end)
@@ -31,9 +33,9 @@ public:
 		int j = end;
 		while (i < j)
 		{
-			while (i < j && compare(numbers[j], flag) >= 0)
+			while (i < j && !compare(numbers[j], flag))
 				j--;
-			while (i < j && compare(numbers[i], flag) <= 0)
+			while (i < j && compare(numbers[i], flag))
 				i++;
 			if (i < j)
 			{
@@ -58,13 +60,16 @@ public:
 		}
 	}
 
-    string PrintMinNumber(vector<int> numbers) {
+    string PrintMinNumber(vector<int> &numbers) {
 		if (numbers.empty())
 			return result;
 
-		int start = 0;
+		/*int start = 0;
 		int end = numbers.size() - 1;
-		quicksort(numbers, start, end);
+		quicksort(numbers, start, end);*/
+
+		auto newfun = bind(&Solution::compare, this, placeholders::_1, placeholders::_2);
+		sort(numbers.begin(), numbers.end(), newfun);
 
 		for (int i = 0; i < numbers.size(); ++i)
 		{
