@@ -12,7 +12,8 @@ public:
 			return 0;
 		int a_start = 0;
 		int a_end = rotateArray.size() - 1;
-		int middle, result;
+		int middle, result = rotateArray[a_start];   
+		//如果array只有两个元素，且为顺序（1，2），则不进入while循环，故需要对result赋初值
 		while(rotateArray[a_start] >= rotateArray[a_end])
 		{
 			if(a_start+1 == a_end)
