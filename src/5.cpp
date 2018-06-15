@@ -37,3 +37,34 @@ private:
     stack<int> stack1;
     stack<int> stack2;
 };
+
+//第二次，优化了可读性
+/*
+class Solution
+{
+public:
+    void push(int node) {
+        stack1.push(node);
+    }
+
+    int pop() {
+		int ret;
+        if (stack2.empty())
+		{
+			while (!stack1.empty())
+			{
+				int val = stack1.top();
+				stack1.pop();
+				stack2.push(val);
+			}
+		}
+		ret = stack2.top();
+		stack2.pop();
+		return ret;
+    }
+
+private:
+    stack<int> stack1;
+    stack<int> stack2;
+};
+*/
