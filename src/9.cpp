@@ -19,3 +19,27 @@ public:
 		return result + 1;
     }
 };
+
+//第二次
+/*
+class Solution {
+public:
+	int jumpnum(int number)
+	{
+		int ret;
+		for (int i = number - 1; number >= 1; --number)
+			ret += jumpFloorII(number - 1);
+		return ret;
+	}
+
+    int jumpFloorII(int number) {
+		if (number <= 0)
+			return 0;
+		if (number == 1)
+			return 1;
+		if (number == 2)
+			return 2;
+		return jumpnum(number); //f(n-1)+f(n-2)+...+f(1)
+    }
+};
+*/
