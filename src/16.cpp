@@ -7,39 +7,58 @@ class Solution {
 public:
     ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
     {
-        if ((pHead1 == nullptr) && (pHead2 == nullptr))
+		if (!pHead1 && !pHead2)
 			return nullptr;
-		if (pHead1 && !pHead2)
-			return pHead1;
-		else if (!pHead1 && pHead2)
+		if (!pHead1)
 			return pHead2;
-        struct ListNode *head = (struct ListNode*)malloc(sizeof(struct ListNode*));
-        head->val = -1;
-		head->next = nullptr;
-		struct ListNode *p = head;
-		while ((pHead1 != nullptr) && (pHead2 != nullptr))
+		if (!pHead2)
+			return pHead1;
+		ListNode *head = new ListNode(-1);
+		ListNode *cur = head;
+		while (pHead1 && pHead2)
 		{
-			if (pHead1->val > pHead2->val)
+			if (pHead1->val <= pHead2->val)
 			{
-				p->next = pHead2;
-				pHead2 = pHead2->next;
-			}
-			else if (pHead1->val <= pHead2->val)
-			{
-				p->next = pHead1;
+				cur->next = pHead1;
 				pHead1 = pHead1->next;
 			}
-			p = p->next;
+			else
+			{
+				cur->next = pHead2;
+				pHead2 = pHead2->next;
+			}
+			cur = cur->next;
 		}
 		if (pHead1)
-		{
-		    p->next = pHead1;
-		}
-		else if(pHead2)
-		{
-		    p->next = pHead2;
-		}
-
+			cur->next = pHead1;
+		else if (pHead2)
+			cur->next = pHead2;
 		return head->next;
     }
 };
+
+//第二次
+/*
+class Solution {
+public:
+    ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+    {
+		if (!pHead1)
+			return pHead2;
+		else if (!pHead2)
+			return pHead1;
+		ListNode *head = nullptr;
+		if (pHead1->val <= pHead2->val)
+		{
+			head = pHead1;
+			head->next = Merge(pHead1->next, pHead2);
+		}
+		else
+		{
+			head = pHead2;
+			head->next = Merge(pHead1, pHead2->next);
+		}
+		return head;
+    }
+};
+*/
