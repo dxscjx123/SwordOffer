@@ -61,3 +61,50 @@ public:
 private:
 	unordered_map<RandomListNode *, RandomListNode *> mapping;
 };
+
+//第二次
+/*
+/*
+struct RandomListNode {
+    int label;
+    struct RandomListNode *next, *random;
+    RandomListNode(int x) :
+            label(x), next(NULL), random(NULL) {
+    }
+};
+
+class Solution {
+public:
+    RandomListNode* Clone(RandomListNode* pHead)
+    {
+        if (!pHead)
+			return nullptr;
+		RandomListNode *dummy = new RandomListNode(-1);
+		RandomListNode *new_head = dummy;
+		RandomListNode *old_head = pHead;
+		while (old_head)
+		{
+			RandomListNode *current = new RandomListNode(old_head->label);
+			if (mapping.find(old_head) == mapping.end())
+				mapping[old_head] = current;
+			new_head->next = current;
+			
+			new_head = new_head->next;
+			old_head = old_head->next;
+		}
+		old_head = pHead;
+		while (old_head)
+		{
+			new_head = mapping[old_head];
+			RandomListNode *old_random = old_head->random;
+			RandomListNode *new_random = mapping[old_random];
+			new_head->random = new_random;
+			
+			old_head = old_head->next;
+		}
+		return dummy->next;
+    }
+private:
+	map<RandomListNode*, RandomListNode*> mapping;
+};
+*/
