@@ -40,3 +40,29 @@ private:
 	vector<int> tree;
 	queue<TreeNode *> tree_node;
 };
+
+//第二次
+/*
+class Solution {
+public:
+    vector<int> PrintFromTopToBottom(TreeNode* root) {
+    	if (!root)
+    		return result;
+    	bfs.push(root);
+    	while (bfs.size())
+    	{
+    		TreeNode *head = bfs.front();
+    		result.push_back(head->val);
+    		bfs.pop();
+    		if (head->left)
+    			bfs.push(head->left);
+    		if (head->right)
+    			bfs.push(head->right);
+    	}
+    	return result;
+    }
+private:
+	vector<int> result;
+	queue<TreeNode *> bfs;
+};
+*/
