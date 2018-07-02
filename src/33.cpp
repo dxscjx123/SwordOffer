@@ -68,3 +68,50 @@ public:
 private:
 	unsigned long result;
 };
+
+//第二次
+/*
+class Solution {
+public:
+	void merge(vector<int> &data, int start_1, int end_1, int start_2, int end_2)
+	{
+		int i = end_1;
+		int j = end_2;
+		while (i >= start_1 && j >= start_2)
+		{
+			if (data[i] > data[j])
+			{
+				result += (j - start_2 + 1);
+				i--;
+			}
+			else
+				j--;
+		}
+		auto iter_begin = data.begin() + start_1;
+		auto iter_end = data.begin() + end_2 + 1;
+		sort(iter_begin, iter_end);
+	}
+
+	void mergesort(vector<int> &data, int start, int end)
+	{
+		if (start >= end)
+			return ;
+		int middle = (start + end) / 2;
+		mergesort(data, start, middle);
+		mergesort(data, middle + 1, end);
+		merge(data, start, middle, middle + 1, end);
+	}
+
+    int InversePairs(vector<int> data) {
+        if (data.empty())
+        	return 0;
+        result = 0;
+        int start = 0;
+        int end = data.size() - 1;
+        mergesort(data, start, end);
+    	return result % 1000000007;
+    }
+private:
+	unsigned long result;
+};
+*/
