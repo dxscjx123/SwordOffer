@@ -35,3 +35,59 @@ public:
 private:
 	int result;
 };
+
+//第二次
+/*
+class Solution {
+public:
+	void binary_search(vector<int> &data, int start, int end, int k)
+	{
+	    if (start > end)
+            return ;
+		int mid;
+		
+		//plan 1 begin
+		while (start <= end) //查找中间项，如果data[mid]==k，则分为start-mid-1与mid+1-end进行查找
+		{
+			mid = (start + end) / 2;
+			if (data[mid] < k)
+				start = mid + 1;
+			else if (data[mid] > k)
+				end = mid - 1;
+			else //相等，则表示已找到一个。
+            {
+                result++;
+                break;
+            }
+		}
+		if (start > end)
+            return ;
+        //plan 1 end
+		
+		//plan 2 begin
+        mid = (start + end) / 2;
+        if (data[mid] < k)
+            start = mid + 1;
+        else if (data[mid] > k)
+            end = mid - 1;
+        else
+            result++;
+		//plan 2 end
+		
+		binary_search(data, start, mid - 1, k);
+		binary_search(data, mid + 1, end, k);
+	}
+
+    int GetNumberOfK(vector<int> data ,int k) {
+        if (data.empty())
+        	return 0;
+        int start = 0;
+        int end = data.size() - 1;
+        result = 0;
+        binary_search(data, start, end, k);
+        return result;
+    }
+private:
+	int result;
+};
+*/
