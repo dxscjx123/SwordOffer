@@ -3,7 +3,7 @@
 // 对二叉树进行深度搜索（先序遍历），记录最大长度的路径并更新长度。
 // 将遍历结点入栈，在回溯时，将结点出栈。
 // 方法二：
-// 见注释。感觉智商收到了暴击。。。。不过确实很简洁。
+// 当前节点所处的深度，等于左右子树较大值+1。空子树的深度为0，直接递归即可。
 
 /*
 struct TreeNode {
@@ -46,11 +46,17 @@ private:
 };
 
 //方法二：
-// int TreeDepth(TreeNode *pRoot)
-// {
-	// if (!pRoot)
-		// return 0;
-	// int nleft = TreeDepth(pRoot->left);
-	// int nright = TreeDepth(pRoot->right);
-	// return (nleft > nright) ? (nleft + 1) : (nright + 1);
-// }
+/*
+class Solution {
+public:
+    int TreeDepth(TreeNode* pRoot)
+    {
+    	if (pRoot == nullptr)
+    		return 0;
+    	int leftdepth = TreeDepth(pRoot->left);
+    	int rightdepth = TreeDepth(pRoot->right);
+    	int depth = (leftdepth > rightdepth) ? (leftdepth + 1) : (rightdepth + 1);
+    	return depth;
+    }
+};
+*/
