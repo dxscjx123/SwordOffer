@@ -34,3 +34,28 @@ public:
 		}
     }
 };
+
+//第二次
+/*
+class Solution {
+public:
+    void FindNumsAppearOnce(vector<int> data,int* num1,int *num2) {
+    	int xor_num = 0;	//0异或任何数都等于其本身
+    	for (int i = 0; i < data.size(); ++i) 
+            xor_num ^= data[i];
+
+    	int tmp = 0x1;
+    	while ((xor_num & tmp) == 0) 	//直接计算得到bit位
+            tmp = tmp << 1;
+
+    	*num1 = *num2 = 0;
+        for (int i = 0; i < data.size(); ++i)
+        {
+            if (data[i] & tmp)
+                *num1 ^= data[i];
+            else
+                *num2 ^= data[i];
+        }
+    }
+};
+*/
