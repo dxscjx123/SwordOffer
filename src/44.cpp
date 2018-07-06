@@ -69,3 +69,30 @@ public:
 		return result;
     }
 };
+
+//第二次
+/*
+class Solution {
+public:
+    bool IsContinuous( vector<int> numbers ) {
+        if (numbers.empty())
+            return false;
+        bool result = true;
+        sort(numbers.begin(), numbers.end());
+        int count_zero = 0;
+        int dis = 0;
+        for (int i = 0; i < numbers.size() - 1; ++i)
+        {
+        	if (numbers[i] == 0)
+        		count_zero++;
+            else if (numbers[i] != 0 && numbers[i] == numbers[i + 1])
+                return false;
+        	else
+        		dis += (numbers[i + 1] - numbers[i] - 1);
+        }
+        if (dis > count_zero)
+        	result = false;
+        return result;
+    }
+};
+*/
