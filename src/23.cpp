@@ -49,3 +49,54 @@ public:
 private:
 	vector<TreeNode *> path;
 };
+
+/////
+/*
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};*/
+class Solution {
+public:
+	void dfs(TreeNode *root, int expectNumber, vector<int> &one_path, int cur_sum)
+	{
+		if (root->left == nullptr && 
+			root->right == nullptr &&
+			cur_sum == expectNumber)
+		{
+			all_path.push_back(one_path);
+			return;
+		}
+
+		if (root->left != nullptr)
+		{
+			one_path.push_back(root->left->val);
+			dfs(root->left, expectNumber, one_path, cur_sum + root->left->val);
+			one_path.pop_back();
+		}
+		if (root->right != nullptr)
+		{
+			one_path.push_back(root->right->val);
+			dfs(root->right, expectNumber, one_path, cur_sum + root->right->val);
+			one_path.pop_back();
+		}
+	}
+
+    vector<vector<int>> FindPath(TreeNode* root,int expectNumber) {
+		vector<int> one_path;
+
+        if (root == nullptr)
+			return all_path;
+
+		one_path.push_back(root->val);
+		dfs(root, expectNumber, one_path, root->val);
+		return all_path;
+    }
+
+private:
+	vector<vector<int>> all_path;
+};
