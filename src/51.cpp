@@ -54,3 +54,28 @@ public:
 private:
 	bool result;
 };
+
+class Solution {
+public:
+    bool dfs(TreeNode *left, TreeNode *right)
+    {
+        if (left == nullptr && right == nullptr)
+            return true;
+
+        if (left == nullptr || right == nullptr)
+            return false;
+
+        if (left->val != right->val)
+            return false;
+
+        return dfs(left->left, right->right) &&
+               dfs(left->right, right->left);
+    }
+
+    bool isSymmetrical(TreeNode* pRoot) {
+        if (pRoot == nullptr)
+            return true;
+
+        return dfs(pRoot->left, pRoot->right);
+    }
+};
