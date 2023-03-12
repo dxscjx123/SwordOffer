@@ -44,3 +44,60 @@ private:
 	set<string> setting;
 	vector<int> visit;
 };
+
+
+//第二次
+class Solution {
+public:
+    bool is_valid_result(string &str, string &one_result)
+    {
+        return ((str.length() == one_result.length()) &&
+                (setting.find(one_result) == setting.end()));
+    }
+
+    void dfs(string &str, string &one_result)
+    {
+        for (int i = 0; i < str.length(); i++)
+        {
+            if (visit[i] == true)
+                continue;
+
+            visit[i] = true;
+            one_result.push_back(str[i]);
+            dfs(str, one_result);
+            one_result.pop_back();
+            visit[i] = false;
+        }
+
+        if (is_valid_result(str, one_result))
+        {
+            all_results.push_back(one_result);
+            setting.insert(one_result);
+        }
+    }
+
+    vector<string> Permutation(string str) {
+        string one_result;
+
+        if (str.length() == 0)
+            return all_results;
+
+        visit.resize(str.length(), false);
+
+        for (int i = 0; i < str.length(); i++)
+        {
+            visit[i] = true;
+            one_result.push_back(str[i]);
+            dfs(str, one_result);
+            visit[i] = false;
+            one_result.pop_back();
+        }
+
+        return all_results;
+    }
+
+private:
+    vector<bool> visit;
+    set<string> setting;
+    vector<string> all_results;
+};
