@@ -45,3 +45,48 @@ public:
 		return (left && right);
     }
 };
+
+//第二次
+class Solution {
+public:
+    bool dfs(vector<int> &sequence, int start, int end)
+    {
+        int i;
+        int boundary;
+        int root;
+        bool left = true;
+        bool right = true;
+
+        if (start >= end)
+            return true;
+
+        root = sequence[end];
+
+        for (i = start; i <= end - 1; i++)
+        {
+            if (sequence[i] > root)
+                break;
+        }
+        boundary = i;
+        for (i = boundary; i <= end - 1; i++)
+        {
+            if (sequence[i] < root)
+                return false;
+        }
+
+        if (boundary > start)
+            left = dfs(sequence, start, boundary - 1);
+
+        if (end > boundary)
+            right = dfs(sequence, boundary, end - 1);
+
+        return left && right;
+    }
+
+    bool VerifySquenceOfBST(vector<int> sequence) {
+        if (sequence.empty())
+            return false;
+
+        return dfs(sequence, 0, sequence.size() - 1);
+    }
+};
