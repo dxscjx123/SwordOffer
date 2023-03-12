@@ -59,3 +59,67 @@ public:
 		return doublelink;
     }
 };
+
+//第二次
+/*
+首先根据分析，最终的双向链表，对于一个节点cur来说，cur->left指向的应该为原本的bst中的cur节点左子树的最大节点
+，即从cur开始遍历到左子树的最右结点。同理，cur->right指向的应该为原本bst中的cur节点右子树的最小节点，即从
+cur开始遍历到右子树的最左节点。那么对于任意节点cur而言
+cur->left = 左子树的最右节点
+cur->right = 右子树的最左节点
+然后再递归处理cur节点的左右子树。
+需要注意的是，在设置cur->left与cur->right之前，首先需要先dfs处理完左右子树，否则会破坏原本的cur->left与
+cur->right节点。
+*/
+
+class Solution {
+public:
+	void dfs(TreeNode *root)
+	{
+		TreeNode *cur, *pre;
+		if (root->left)
+		{
+			dfs(root->left);
+			cur = root->left;
+			pre = nullptr;
+			while (cur)
+			{
+				pre = cur;
+				cur = cur->right;
+			}
+			root->left = pre;
+			pre->right = root;
+		}
+
+		if (root->right)
+		{
+			dfs(root->right);
+			cur = root->right;
+			pre = nullptr;
+			while (cur)
+			{
+				pre = cur;
+				cur = cur->left;
+			}
+			root->right = pre;
+			pre->left = root;
+		}
+	}
+
+    TreeNode* Convert(TreeNode* pRootOfTree) {
+		TreeNode *head = nullptr;
+
+        if (pRootOfTree == nullptr)
+			return nullptr;
+
+		dfs(pRootOfTree);
+
+		while (pRootOfTree)
+		{
+			head = pRootOfTree;
+			pRootOfTree = pRootOfTree->left;
+		}
+
+		return head;
+    }
+};
